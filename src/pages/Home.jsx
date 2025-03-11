@@ -9,18 +9,25 @@ import { toast } from "react-toastify";
 const Home = () => {
 
 const {theme} = useSelector((state)=>state.coins)
-const {user,message,isError} = useSelector((state)=>state.auth)
+const {user,message,isError,isLoading} = useSelector((state)=>state.auth)
 
 const navigate = useNavigate()
 
 useEffect(()=>{
     if(!user){
         navigate('/login')
+    }else{
+        navigate('/')
     }
     if(isError && message){
         toast.error(message,{position:'top-center'})
     }
 },[user,isError,message])
+
+if(isLoading)
+    {
+      <h1 className="text-4xl p-4 font-bold text-gray-600">Loading...</h1>
+    }
 
 return (
 <div

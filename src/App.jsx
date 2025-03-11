@@ -11,6 +11,7 @@ import Theme from "./components/Theme";
 import SearchPage from "./pages/SearchPage";
 import CoinPage from "./pages/CoinPage";
 import { ToastContainer} from 'react-toastify';
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -18,12 +19,15 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="*" element={<PageNotFound />} />
-        <Route path="/" element={<Home />} />
+        
+        <Route path="/" element={<PrivateRoute/>}>
+        <Route path="" element={<Home />} />
+        <Route path="cart" element={<Cart />}/>
+        <Route path="coin/search/:searchquery" element={<SearchPage/>}/>
+        <Route path="coin/:id" element={<CoinPage/>}/>
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/coin/search/:searchquery" element={<SearchPage/>}/>
-        <Route path="/coin/:id" element={<CoinPage/>}/>
       </Routes>
       <ToastContainer />
       <Theme/>
